@@ -1,4 +1,4 @@
-# OOP Group 5 Final Project
+# OOP Group 5 Final Project (Flask Web App)
 
 Prerequisites
 
