@@ -3,13 +3,24 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
+# == Model ==
+class Todos (db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    desc = db.Column(db.String(500), nullable=False)
 class Controller:
     def home(self):
-        return render_template('index.html')
+        todo = Todos(title="Hello world", desc="First data stored in db")
+
+        db.session.add(todo)
+        db.session.commit()
+
+        all_todos = Todos.query.all()
+        return render_template('index.html', todos = all_todos)
 
 controller = Controller();
 

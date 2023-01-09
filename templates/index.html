@@ -8,5 +8,9 @@
   </head>
   <body>
     <h1 class="hah">Hello World</h1>
+    {% for todo in todos %}
+    <h1>{{todo.title}}</h1>
+    <p>{{todo.desc}}</p>
+    {% endfor %}
   </body>
 </html>
