@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -13,6 +13,7 @@ class Todos (db.Model):
     title = db.Column(db.String(200), nullable=False)
     desc = db.Column(db.String(500), nullable=False)
 
+# == Controller ==
 class Controller:
     def fetchTodos(self):
         all_todos = Todos.query.all()
@@ -31,10 +32,12 @@ class Controller:
 
     def deleteTodo(self):
         # apply logic here
+
         return self
 
 controller = Controller();
 
+# == Web app routes ==
 @app.route('/', methods=['POST', 'GET'])
 def home():
 
@@ -43,6 +46,11 @@ def home():
 
     todos = controller.fetchTodos()
     return render_template('index.html', todos = todos)
+
+@app.route('/delete/<int:_id>')
+def delete():
+    # apply route logic here
+    redirect('/');
 
 if __name__ == "__main__":
     app.run(debug = True)
