@@ -65,8 +65,8 @@
                 <td>{{todo.title}}</td>
                 <td>{{todo.desc}}</td>
                 <td class="button-row">
-                  <a href="/ " class="actions-btns edit">Edit</a>
-                  <a href="/" class="actions-btns delete">Delete</a>
+
+                  <a href="/delete/{{todo._id}}" class="actions-btns delete">Delete</a>
                 </td>
               </tr>
               {%endfor%}

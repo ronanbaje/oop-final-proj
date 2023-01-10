@@ -28,12 +28,12 @@ class Controller:
         db.session.add(todo)
         db.session.commit()
 
-        return self
 
-    def deleteTodo(self):
+    def deleteTodo(self, _id):
         # apply logic here
-
-        return self
+        todo = Todos.query.filter_by(_id=_id).first()
+        db.session.delete(todo)
+        db.session.commit()
 
 controller = Controller();
 
@@ -48,9 +48,10 @@ def home():
     return render_template('index.html', todos = todos)
 
 @app.route('/delete/<int:_id>')
-def delete():
+def delete(_id):
     # apply route logic here
-    redirect('/');
+    controller.deleteTodo(_id)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug = True)
