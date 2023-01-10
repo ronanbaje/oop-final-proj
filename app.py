@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -12,19 +12,37 @@ class Todos (db.Model):
     _id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     desc = db.Column(db.String(500), nullable=False)
+
 class Controller:
-    def home(self):
-        todo = Todos(title="Hello world", desc="First data stored in db")
+    def fetchTodos(self):
+        all_todos = Todos.query.all()
+        return all_todos
+
+    def addTodo(self):
+        title = request.form['title']
+        desc = request.form['description']
+
+        todo = Todos(title=title, desc=desc)
 
         db.session.add(todo)
         db.session.commit()
 
-        all_todos = Todos.query.all()
-        return render_template('index.html', todos = all_todos)
+        return self
+
+    def deleteTodo(self):
+        # apply logic here
+        return self
 
 controller = Controller();
 
-app.add_url_rule('/', 'index', lambda: controller.home())
+@app.route('/', methods=['POST', 'GET'])
+def home():
+
+    if request.method == 'POST':
+        controller.addTodo()
+
+    todos = controller.fetchTodos()
+    return render_template('index.html', todos = todos)
 
 if __name__ == "__main__":
     app.run(debug = True)

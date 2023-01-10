@@ -21,9 +21,9 @@
       <div class="contant section-1">
         <h2>Add your Todo</h2>
         <hr />
-        <form method="POST" action="/" class=""form" name="form">
+        <form method="POST" action="/" class="form" name="form">
           <div class="input-div">
-            <label for=""title">Enter your Todo Title</label>
+            <label for="title">Enter your Todo Title</label>
             <input
             type="text"
             name="title"
@@ -37,7 +37,7 @@
             <label for="description">Describe your todo here</label>
             <input
               type="text"
-              name="input=text"
+              name="description"
               id="description"
               placeholder="Enter a description"
             /> 
@@ -60,15 +60,16 @@
               </tr>
             </thead>
             <tbody>
+              {% for todo in todos%}
               <tr>
-                <td>Todo title</td>
-                <td>This is Description of my Todo</td>
-                <td>12 / 2 / 2023</td>
+                <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td>
                 <td class="button-row">
                   <a href="/ " class="actions-btns edit">Edit</a>
                   <a href="/" class="actions-btns delete">Delete</a>
                 </td>
               </tr>
+              {%endfor%}
             </tbody>
       </div>
     </div>
