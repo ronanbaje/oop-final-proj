@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Group 5 | OOP Final Project</title>
+  </head>
+  <body>
+    <header class="head">
+      <div class="content-header">
+        <h2><a href="/" class="logo">My To Do</a></h2>
+        <ul>
+          <li><a href="/" class="active">Go to list</a></li>
+        </ul>
+        </div>
+    </header>
+
+    <div class="container">
+      <div class="content-section-1">
+        
+        <h2>Add your To do</h2>
+
+        <form method="POST" action="/" class="form" name="form">
+            <div>
+                <hr class="hr-1"/>
+            </div>
+            <div class="input-div">
+            
+            <label for="title">Enter your To Do Title</label>
+            <input
+            type="text"
+            name="title"
+            id="title"
+            class="input-text"
+            placeholder="Enter a title"
+            />
+          </div>
+
+          <div class="input-div-1">
+            <label for="description">Describe your To Do here</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              class="input-text-1"
+              placeholder="Enter a description"
+            /> 
+          </div>
+          
+          <button class="add-btn" type="submit">Add</button>
+
+        </form> 
+      </div>
+      <div class="container-section-2">
+
+        <h2> Your Todos</h2>
+
+        <div class="table-div">
+          <table id="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th class="description">Description</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              {% for todo in todos%} 
+              <tr>
+              <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td> 
+                <td class="button-row">
+
+                 <!-- <button class="actions-btns-delete" a= "/delete/{{todo._id}}">Delete</a> </button> -->
+                </td>
+              </tr>
+              
+            {%endfor%}
+            </tbody>
+            <hr class="hr-2"/>
+      </div>
+    </div>
+  </body>
+</html> 
